@@ -30,7 +30,6 @@ public class InsertionSort<X extends Comparable<X>> extends SortWithHelper<X> {
     public InsertionSort(int N, Config config) {
         this(DESCRIPTION, N, config);
     }
-
     public InsertionSort(Config config) {
         this(new BaseHelper<>(DESCRIPTION, config));
     }
