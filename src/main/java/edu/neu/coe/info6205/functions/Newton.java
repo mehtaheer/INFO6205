@@ -69,7 +69,6 @@ public class Newton {
                     System.out.println("Good news! " + newton.equation + " was solved: " + aDouble);
                 });
     }
-
     private final String equation;
     private final DoubleFunction<Double> f;
     private final DoubleFunction<Double> dfbydx;
