@@ -2,7 +2,6 @@ package edu.neu.coe.info6205.functions;
 
 import java.util.function.DoubleFunction;
 
-
 /**
  * This class models the Newton-Raphson Approximation algorithm.
  * See https://en.wikipedia.org/wiki/Newton%27s_method
