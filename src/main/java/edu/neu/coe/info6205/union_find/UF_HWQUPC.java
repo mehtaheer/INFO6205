@@ -8,7 +8,6 @@
 package edu.neu.coe.info6205.union_find;
 
 import java.util.Arrays;
-
 /**
  * Height-weighted Quick Union with Path Compression
  */
