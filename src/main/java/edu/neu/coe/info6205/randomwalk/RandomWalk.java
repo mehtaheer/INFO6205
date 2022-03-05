@@ -13,7 +13,6 @@ public class RandomWalk {
     private int y = 0;
 
     private final Random random = new Random();
-
     /**
      * Private method to move the current position, that's to say the drunkard moves
      *
