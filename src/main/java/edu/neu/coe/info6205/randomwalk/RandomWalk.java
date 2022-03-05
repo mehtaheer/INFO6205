@@ -4,6 +4,7 @@
 
 package edu.neu.coe.info6205.randomwalk;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomWalk {
@@ -21,7 +22,9 @@ public class RandomWalk {
      */
     private void move(int dx, int dy) {
         // FIXME do move by replacing the following code
-         throw new RuntimeException("Not implemented");
+    	this.x+=dx; 
+    	this.y+=dy;
+        
         // END 
     }
 
@@ -31,7 +34,10 @@ public class RandomWalk {
      * @param m the number of steps the drunkard takes
      */
     private void randomWalk(int m) {
-        // FIXME
+    	while(m>0) {
+    		randomMove();
+    		m--;
+    	}
         // END 
     }
 
@@ -51,9 +57,10 @@ public class RandomWalk {
      * @return the (Euclidean) distance from the origin to the current position.
      */
     public double distance() {
-        // FIXME
+        // Formula for euclidean Distance
+    	return Math.sqrt(Math.pow(this.x, 2)+Math.pow(this.y, 2));
         // END
-        return 0;
+        
     }
 
     /**
@@ -76,11 +83,19 @@ public class RandomWalk {
     public static void main(String[] args) {
         if (args.length == 0)
             throw new RuntimeException("Syntax: RandomWalk steps [experiments]");
-        int m = Integer.parseInt(args[0]);
-        int n = 30;
-        if (args.length > 1) n = Integer.parseInt(args[1]);
-        double meanDistance = randomWalkMulti(m, n);
-        System.out.println(m + " steps: " + meanDistance + " over " + n + " experiments");
+      ArrayList<Integer> experiments=new ArrayList<>();
+       // int[] experiments=new int[args.length];
+        for(int i=0;i<args.length;i++) experiments.add(Integer.parseInt(args[i]));
+       
+        int n = 50;
+      
+        for(int i=1;i<experiments.get(0);i++) {
+        	int m=i*i;
+        	if(m<=experiments.get(0)) {
+        	double meanDistance = randomWalkMulti(m, n);
+        	System.out.println(m + " steps: " + meanDistance + " over " + n + " experiments");
+        	}
+        }
     }
 
 }

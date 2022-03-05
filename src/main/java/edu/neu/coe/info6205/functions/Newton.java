@@ -2,6 +2,7 @@ package edu.neu.coe.info6205.functions;
 
 import java.util.function.DoubleFunction;
 
+
 /**
  * This class models the Newton-Raphson Approximation algorithm.
  * See https://en.wikipedia.org/wiki/Newton%27s_method
@@ -52,7 +53,7 @@ public class Newton {
     public static void main(String[] args) {
 
         // Build the Newton's Approximation problem to be solved: cos(x) = x
-        Newton newton = new Newton("cos(x) - x", (double x) -> Math.cos(x) - x, (double x) -> -Math.sin(x) - 1);
+    	Newton newton = new Newton("x^3 + x^2 - 12", (double x) -> Math.pow(x, 3) + Math.pow(x,2) - 12, (double x) -> 3 * Math.pow(x, 2) + 2* Math.pow(x, 1));
 
         // Solve the problem starting with a value of x = 1;
         // requiring a precision of 10^-7;
