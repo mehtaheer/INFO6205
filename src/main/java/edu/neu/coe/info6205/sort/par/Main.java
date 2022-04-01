@@ -29,18 +29,21 @@ public class Main {
             long startTime = System.currentTimeMillis();
             for (int t = 0; t < 10; t++) {
                 for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
-                ParSort.sort(array, 0, array.length);
+              //  ParSort.sort(array, 0, array.length, 8);
+                //ParSort.sort(array, 0, array.length, 4);
+               //ParSort.sort(array, 0, array.length, 2);
+                ParSort.mergeSort(array);
             }
             long endTime = System.currentTimeMillis();
             time = (endTime - startTime);
             timeList.add(time);
 
 
-            System.out.println("cutoff：" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
+            System.out.println("cutoff" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
 
         }
         try {
-            FileOutputStream fis = new FileOutputStream("./src/result.csv");
+            FileOutputStream fis = new FileOutputStream("./src/result3.csv");
             OutputStreamWriter isr = new OutputStreamWriter(fis);
             BufferedWriter bw = new BufferedWriter(isr);
             int j = 0;

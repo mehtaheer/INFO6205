@@ -11,12 +11,16 @@ class ParSort {
 
     public static int cutoff = 1000;
 
-    public static void sort(int[] array, int from, int to) {
+    public static void sort(int[] array, int from, int to,int threadC) {
+    	
         if (to - from < cutoff) Arrays.sort(array, from, to);
+        else if (threadC<=1) {
+        	mergeSort(array);
+		}
         else {
             // FIXME next few lines should be removed from public repo.
-            CompletableFuture<int[]> parsort1 = parsort(array, from, from + (to - from) / 2); // TO IMPLEMENT
-            CompletableFuture<int[]> parsort2 = parsort(array, from + (to - from) / 2, to); // TO IMPLEMENT
+            CompletableFuture<int[]> parsort1 = parsort(array, from, from + (to - from) / 2, threadC/2); // TO IMPLEMENT
+            CompletableFuture<int[]> parsort2 = parsort(array, from + (to - from) / 2, to, threadC/2); // TO IMPLEMENT
             CompletableFuture<int[]> parsort = parsort1.thenCombine(parsort2, (xs1, xs2) -> {
                 int[] result = new int[xs1.length + xs2.length];
                 // TO IMPLEMENT
@@ -42,15 +46,38 @@ class ParSort {
         }
     }
 
-    private static CompletableFuture<int[]> parsort(int[] array, int from, int to) {
+    private static CompletableFuture<int[]> parsort(int[] array, int from, int to, int count) {
         return CompletableFuture.supplyAsync(
                 () -> {
                     int[] result = new int[to - from];
                     // TO IMPLEMENT
                     System.arraycopy(array, from, result, 0, result.length);
-                    sort(result, 0, to - from);
+                    sort(result, 0, to - from, count);
                     return result;
                 }
         );
     }
+    public static void mergeSort(int[] a) {
+		if (a.length >= 2) {
+			int[] left  = Arrays.copyOfRange(a, 0, a.length / 2);
+			int[] right = Arrays.copyOfRange(a, a.length / 2, a.length);
+			mergeSort(left);
+			mergeSort(right);
+			merge(left, right, a);
+		}
+	}
+	
+	public static void merge(int[] left, int[] right, int[] a) {
+		int i1 = 0;
+		int i2 = 0;
+		for (int i = 0; i < a.length; i++) {
+			if (i2 >= right.length || (i1 < left.length && left[i1] < right[i2])) {
+				a[i] = left[i1];
+				i1++;
+			} else {
+				a[i] = right[i2];
+				i2++;
+			}
+		}
+	}
 }
